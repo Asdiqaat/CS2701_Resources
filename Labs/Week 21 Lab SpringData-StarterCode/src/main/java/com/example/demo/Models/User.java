@@ -1,6 +1,7 @@
 package com.example.demo.Models;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -15,6 +16,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -52,6 +54,11 @@ public class User implements Serializable {
 	@LastModifiedDate
 	private Date updatedAt;
 	
+	@OneToMany(mappedBy = "seller")
+	private Collection<SellerProduce> sellerProduces;
+	
+	@OneToMany(mappedBy = "buyer")
+	private Collection<Order> orders;
 	
 	 public User() {
 			super();
@@ -114,7 +121,37 @@ public class User implements Serializable {
 		this.userType = userType;
 	}
 
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Collection<SellerProduce> getSellerProduces() {
+		return sellerProduces;
+	}
+
+	public void setSellerProduces(Collection<SellerProduce> sellerProduces) {
+		this.sellerProduces = sellerProduces;
+	}
+
+	public Collection<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Collection<Order> orders) {
+		this.orders = orders;
+	}
 
 	@Override
 	public String toString() {
